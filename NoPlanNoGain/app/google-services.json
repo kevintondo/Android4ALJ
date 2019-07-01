@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "537834404570",
+    "firebase_url": "https://no-plan-no-gain-41121.firebaseio.com",
+    "project_id": "no-plan-no-gain-41121",
+    "storage_bucket": "no-plan-no-gain-41121.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537834404570:android:37df6daf4c84c4ac",
+        "android_client_info": {
+          "package_name": "com.example.noplannogain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537834404570-vc5ic55fb2ujhab2onqlv30gmiqb28u3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noplannogain",
+            "certificate_hash": "d3c0cdcf28c077dc48f44fc3dd83116724f14635"
+          }
+        },
+        {
+          "client_id": "537834404570-b8ls6gg5peg077hqldpvpnfbqdhi1nrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAMRyxDuxHIntguYKRnHe0y9fcmmrmcE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537834404570-b8ls6gg5peg077hqldpvpnfbqdhi1nrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
