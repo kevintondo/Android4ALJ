@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">No Plan No Gain</string>
+    <string name="w_name_input_label">Nom de l\'exercice</string>
+    <string name="w_desc_input_label">Description</string>
+    <string name="w_difficulty_label">Difficulté</string>
+    <string name="w_btn_add_exercice_label">Ajouter</string>
+    <string name="w_btn_plus_label">+</string>
 </resources>

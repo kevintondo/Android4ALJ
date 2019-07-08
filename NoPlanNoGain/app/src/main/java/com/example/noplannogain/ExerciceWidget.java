@@ -10,9 +10,7 @@ public class ExerciceWidget extends AppWidgetProvider {
     private static final String TAG = "Ajout d'exercices";
 
     public static void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId/*, String text*/) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.addexercicewidget);  // layout du widget
-        views.setTextViewText(R.id.w_difficulty_label, "pouet");
-
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);  // layout du widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

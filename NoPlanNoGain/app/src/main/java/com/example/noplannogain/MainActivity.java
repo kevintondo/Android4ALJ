@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void readExercice(View v) {
         String exerciceName = sharedPreferences.getString(EXO_NAME_FIELD_NAME, "Nothing");
-        String exerciceDesc = sharedPreferences.getString(EXO_NAME_FIELD_NAME, "Nothing");
-        String exerciceType = sharedPreferences.getString(EXO_NAME_FIELD_NAME, "Nothing");
+        String exerciceDesc = sharedPreferences.getString(EXO_DESC_FIELD_NAME, "Nothing");
+        String exerciceType = sharedPreferences.getString(EXO_TYPE_FIELD_NAME, "Nothing");
 
         // Toast.makeText(this, val, Toast.LENGTH_SHORT).show();
     }

@@ -4,8 +4,8 @@
     android:minHeight="40dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="180000"
-    android:initialLayout="@layout/addexercicewidget"
+    android:initialLayout="@layout/appwidget"
     android:previewImage="@mipmap/ic_launcher_foreground"
-    android:widgetCategory="home_screen">               <!-- Mieux supporté par les contructeurs -->
+    android:widgetCategory="home_screen">
 
 </appwidget-provider>
