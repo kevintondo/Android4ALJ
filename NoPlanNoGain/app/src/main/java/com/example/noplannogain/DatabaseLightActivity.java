@@ -13,16 +13,14 @@ public class DatabaseLightActivity extends AppCompatActivity {
     private static final String TAG = "DatabaseLightActivity";
 
     DatabaseHelper mDatabaseHelper;
-    private Button btnAdd, btnViewData;
     private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_database_light);
         editText = (EditText) findViewById(R.id.editText);
-        btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnViewData = (Button) findViewById(R.id.btnView);
+        Button btnAdd = (Button) findViewById(R.id.btnAdd);
         mDatabaseHelper = new DatabaseHelper(this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -39,14 +37,12 @@ public class DatabaseLightActivity extends AppCompatActivity {
             }
         });
 
-        btnViewData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DatabaseLightActivity.this, ListDataActivity.class);
-                startActivity(intent);
-            }
-        });
 
+    }
+
+    public void seeData(View v){
+        Intent intent = new Intent(DatabaseLightActivity.this, DatabaseLightActivity.class);
+        startActivity(intent);
     }
 
     public void AddData(String newEntry) {
