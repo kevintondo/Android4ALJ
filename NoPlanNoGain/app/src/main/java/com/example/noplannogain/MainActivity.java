@@ -1,9 +1,11 @@
 package com.example.noplannogain;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE);
+
     }
 
     public void writeExercice(View v) {
@@ -39,5 +42,10 @@ public class MainActivity extends AppCompatActivity {
         String exerciceType = sharedPreferences.getString(EXO_TYPE_FIELD_NAME, "Nothing");
 
         // Toast.makeText(this, val, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setPersonnalsDatas(View v){
+        Intent intent = new Intent(MainActivity.this, DatabaseLightActivity.class);
+        startActivity(intent);
     }
 }
