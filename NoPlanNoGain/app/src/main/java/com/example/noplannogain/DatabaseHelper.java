@@ -21,29 +21,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 +" TEXT)";
+        String createTable = "CREATE TABLE " +
+                TABLE_NAME +
+                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COL2 +" TEXT," +COL3+" TEXT,"+COL4+" TEXT)";
         db.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        if (i > i1) {
+            db.execSQL("ALTER TABLE "+TABLE_NAME+" ADD COLUMN taille TEXT");
+        }
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    public boolean addData(String name, String sexe, String taille) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, item);
+        contentValues.put(COL2, name);
+        contentValues.put(COL3, sexe);
+        contentValues.put(COL4, taille);
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
-
+        Log.d(TAG, "addData: Adding " + name +" "+ sexe +" "+ taille + " to " + TABLE_NAME);
+        db.execSQL("DELETE FROM "+TABLE_NAME+";");
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         //if date as inserted incorrectly it will return -1

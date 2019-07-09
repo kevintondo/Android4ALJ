@@ -13,31 +13,36 @@ public class DatabaseLightActivity extends AppCompatActivity {
     private static final String TAG = "DatabaseLightActivity";
 
     DatabaseHelper mDatabaseHelper;
-    private EditText editText;
+    private EditText editTextName;
+    private EditText editTextSexe;
+    private EditText editTextTaille;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database_light);
-        editText = (EditText) findViewById(R.id.editText);
+        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextSexe = (EditText) findViewById(R.id.editTextSexe);
+        editTextTaille = (EditText) findViewById(R.id.editTextTaille);
         Button btnAdd = (Button) findViewById(R.id.btnAdd);
         mDatabaseHelper = new DatabaseHelper(this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newEntry = editText.getText().toString();
-                if (editText.length() != 0) {
-                    AddData(newEntry);
-                    editText.setText("");
+                String name = editTextName.getText().toString();
+                String sexe = editTextSexe.getText().toString();
+                String taille = editTextTaille.getText().toString();
+                if (editTextName.length() != 0 && editTextSexe.length() != 0 && editTextTaille.length() != 0 ) {
+                    AddData(name, sexe, taille);
+                    editTextName.setText("");
+                    editTextSexe.setText("");
+                    editTextTaille.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
-
             }
         });
-
-
     }
 
     public void seeData(View v){
@@ -45,8 +50,8 @@ public class DatabaseLightActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+    public void AddData(String name, String sexe, String taille) {
+        boolean insertData = mDatabaseHelper.addData(name, sexe, taille);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
