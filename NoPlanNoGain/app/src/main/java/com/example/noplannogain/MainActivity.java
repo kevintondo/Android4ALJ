@@ -48,9 +48,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, DatabaseLightActivity.class);
         startActivity(intent);
     }
-
-    public void displayPersonnalsDatas(View v){
-        Intent intent = new Intent(MainActivity.this, DisplayPrefDataActivity.class);
-        startActivity(intent);
-    }
 }

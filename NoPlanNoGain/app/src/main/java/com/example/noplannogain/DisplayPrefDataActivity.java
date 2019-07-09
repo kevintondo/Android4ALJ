@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DisplayPrefDataActivity extends AppCompatActivity {
     private TextView displayName;
@@ -34,6 +35,7 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
     }
 
     private void setDisplayView() {
+        toastMessage("je suis ici !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         SQLiteOpenHelper database = new DatabaseHelper(this);
         SQLiteDatabase db = database.getReadableDatabase();
 
@@ -52,9 +54,9 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
         }
         c.close();
         db.close();
+    }
 
-
-
-
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -67,4 +67,9 @@ public class DatabaseLightActivity extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
+
+    public void displayPersonnalsDatas(View v){
+        Intent intent = new Intent(DatabaseLightActivity.this, DisplayPrefDataActivity.class);
+        startActivity(intent);
+    }
 }
