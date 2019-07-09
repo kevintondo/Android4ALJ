@@ -23,8 +23,6 @@
             android:name=".DatabaseLightActivity"
             android:label="android.intent.action.DatabaseLight">
         </activity>
-        <activity android:name=".ListDataActivity" />
-        <activity android:name=".EditDataActivity" />
 
         <receiver android:name=".ExerciceWidget">
             <intent-filter>
