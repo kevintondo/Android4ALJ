@@ -24,14 +24,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 4);
+        super(context, TABLE_NAME, null, 6);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " +
                 TABLE_NAME +
-                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COL2 +" TEXT," +COL3+" TEXT,"+COL4+" TEXT,"+COL5+" TEXT)";
+                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COL2 +" TEXT," +COL3+" TEXT,"+COL4+" INTEGER,"+COL5+" INTEGER)";
         db.execSQL(createTable);
     }
 
