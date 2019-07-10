@@ -21,6 +21,7 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
     private TextView displayName;
     private TextView displaySexe;
     private TextView displayTaille;
+    private TextView displayPoid;
 
     DatabaseHelper mDatabaseHelper;
 
@@ -31,13 +32,14 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
         displayName = (TextView) findViewById(R.id.displayName);
         displaySexe = (TextView) findViewById(R.id.displaySexe);
         displayTaille = (TextView) findViewById(R.id.displayTaille);
+        displayPoid = (TextView) findViewById(R.id.displayPoid);
+
         mDatabaseHelper = new DatabaseHelper(this);
 
         setDisplayView();
     }
 
     private void setDisplayView() {
-        toastMessage("je suis ici !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         SQLiteOpenHelper database = new DatabaseHelper(this);
         SQLiteDatabase db = database.getReadableDatabase();
 
@@ -48,10 +50,12 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
                 String name = c.getString(1);
                 String sexe = c.getString(2);
                 String taille = c.getString(3);
+                String poid = c.getString(4);
                 // Do something Here with values
                 displayName.setText(name);
                 displaySexe.setText(sexe);
                 displayTaille.setText(taille);
+                displayPoid.setText(poid);
             } while(c.moveToNext());
         }
         c.close();
@@ -64,6 +68,11 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
 
     public void setPersonnalsDatas(View v){
         Intent intent = new Intent(DisplayPrefDataActivity.this, DatabaseLightActivity.class);
+        startActivity(intent);
+    }
+
+    public void displayImc(View v){
+        Intent intent = new Intent(DisplayPrefDataActivity.this, DisplayIMCActivity.class);
         startActivity(intent);
     }
 }

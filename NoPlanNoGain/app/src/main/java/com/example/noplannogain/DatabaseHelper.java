@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
@@ -21,32 +24,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " +
                 TABLE_NAME +
-                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COL2 +" TEXT," +COL3+" TEXT,"+COL4+" TEXT)";
+                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COL2 +" TEXT," +COL3+" TEXT,"+COL4+" TEXT,"+COL5+" TEXT)";
         db.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         if (i > i1) {
-            db.execSQL("ALTER TABLE "+TABLE_NAME+" ADD COLUMN taille TEXT");
+            db.execSQL("ALTER TABLE "+TABLE_NAME+" ADD COLUMN poid TEXT");
         }
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    public boolean addData(String name, String sexe, String taille) {
+    public boolean addData(String name, String sexe, String taille, String poid) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, name);
         contentValues.put(COL3, sexe);
         contentValues.put(COL4, taille);
+        contentValues.put(COL5, poid);
 
         Log.d(TAG, "addData: Adding " + name +" "+ sexe +" "+ taille + " to " + TABLE_NAME);
         db.execSQL("DELETE FROM "+TABLE_NAME+";");
@@ -60,59 +64,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Returns all the data from database
-     * @return
-     */
-    public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
+    public ArrayList<String> getDatas(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> result = new ArrayList<String>();
+        Cursor c = db.rawQuery("SELECT * FROM pref_table", null);
+        if (c.moveToFirst()){
+            do {
+                // Passing values
 
-    /**
-     * Returns only the ID that matches the name passed in
-     * @param name
-     * @return
-     */
-    public Cursor getItemID(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + name + "'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
-    /**
-     * Updates the name field
-     * @param newName
-     * @param id
-     * @param oldName
-     */
-    public void updateName(String newName, int id, String oldName){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
-                " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
-                " AND " + COL2 + " = '" + oldName + "'";
-        Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
-        db.execSQL(query);
-    }
-
-    /**
-     * Delete from database
-     * @param id
-     * @param name
-     */
-    public void deleteName(int id, String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-                + COL1 + " = '" + id + "'" +
-                " AND " + COL2 + " = '" + name + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + name + " from database.");
-        db.execSQL(query);
+                result.add(c.getString(1));
+                result.add(c.getString(2));
+                result.add(c.getString(3));
+                result.add(c.getString(4));
+                // Do something Here with values
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return result;
     }
 
 }
