@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
     private final String EXO_NAME_FIELD_NAME = "exercice_name";
     private final String EXO_DESC_FIELD_NAME = "exercice_description";
     private final String EXO_TYPE_FIELD_NAME = "exercice_type";
+
+
 
     private SharedPreferences sharedPreferences;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE);
+
+
 
     }
 
@@ -47,5 +50,12 @@ public class MainActivity extends AppCompatActivity {
     public void setPersonnalsDatas(View v){
         Intent intent = new Intent(MainActivity.this, DatabaseLightActivity.class);
         startActivity(intent);
+    }
+
+    public void setGotoHome(View v){
+
+        Intent intent2 = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent2);
+
     }
 }
