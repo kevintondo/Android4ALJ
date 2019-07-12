@@ -75,4 +75,9 @@ public class DisplayPrefDataActivity extends AppCompatActivity {
         Intent intent = new Intent(DisplayPrefDataActivity.this, DisplayIMCActivity.class);
         startActivity(intent);
     }
+
+    public void displayGraph(View v){
+        Intent intent = new Intent(DisplayPrefDataActivity.this, GraphActivity.class);
+        startActivity(intent);
+    }
 }
