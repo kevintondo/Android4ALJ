@@ -11,6 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Calendar"></activity>
+        <activity android:name=".Daily_Training" />
+        <activity android:name=".SettingPage" />
+
+        <receiver android:name=".AlarmNotificationReceiver" />
+
+        <activity android:name=".ViewExercice" />
         <activity android:name=".ListExercices" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".WidgetConfActivity" />
