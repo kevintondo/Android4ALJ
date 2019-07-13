@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.noplannogain.Interface.ItemClickListener;
 import com.example.noplannogain.Model.Exercice;
 import com.example.noplannogain.R;
+import com.example.noplannogain.ViewExercice;
 
 import java.util.List;
 
@@ -73,8 +74,12 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewHolde
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(context,"Click to "+ exerciceList.get(position).getName(), Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(context, ViewExercice.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("image_id", exerciceList.get(position).getImage_id());
+                intent.putExtra("name", exerciceList.get(position).getName());
+                context.startActivity(intent);
             }
         });
     }
