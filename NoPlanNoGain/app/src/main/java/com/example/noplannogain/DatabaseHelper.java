@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.example.noplannogain.Model.GraphEntry;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createGraphTable = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_GRAPH_NAME +
-                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COLGRAPH2 +" INTEGER," +COLGRAPH3+" DATE)";
+                " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +COLGRAPH2 +" INTEGER," +COLGRAPH3+" DATETIME DEFAULT CURRENT_TIMESTAMP)";
         db.execSQL(createGraphTable);
     }
 
@@ -66,9 +66,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @TargetApi(Build.VERSION_CODES.N)
     public boolean addData(String name, String sexe, String taille, String poid) {
 
-            java.util.Date dateC = new java.util.Date();
-            SimpleDateFormat df = null;
-            df = new SimpleDateFormat("dd-MMM-yyyy");
+            java.sql.Date dateC = new java.sql.Date(System.currentTimeMillis());
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:m:s");
             String formattedDate = df.format(dateC);
 
 
@@ -81,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValueInfos.put(COL5, poid);
 
         ContentValues contentValueGraph = new ContentValues();
-        contentValueGraph.put(COLGRAPH3, String.valueOf(dateC));
+//        contentValueGraph.put(COLGRAPH3, String.valueOf(formattedDate));
         contentValueGraph.put(COLGRAPH2, Integer.parseInt(poid));
 
         db.execSQL("DELETE FROM "+TABLE_NAME+";");
@@ -126,15 +125,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 int poid = cursor.getInt(cursor.getColumnIndex("poid"));
-
-                Log.d("date before", date);
-
-                Date dateDate = Date.valueOf(date);//converting string into sql date
-
-                    GraphEntry graphEntry = new GraphEntry(dateDate, poid);
+                try {
+                    Date date1=new SimpleDateFormat("yyyy-MM-dd H:mm:ss").parse(date);
+                    GraphEntry graphEntry = new GraphEntry(date1, poid);
                     result.add(graphEntry);
-                    int a =0;
-
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             } while(cursor.moveToNext());
         }
         cursor.close();

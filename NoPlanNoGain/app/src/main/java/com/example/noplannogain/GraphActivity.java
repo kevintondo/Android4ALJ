@@ -10,9 +10,9 @@ import com.example.noplannogain.Model.GraphEntry;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GraphActivity extends AppCompatActivity {
@@ -31,15 +31,10 @@ public class GraphActivity extends AppCompatActivity {
         ArrayList entities =  dh.getGraphDatas();
 
         for(int i=0; i<entities.size();i++){
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            try {
-                Date date = (Date) format.parse((String)entities.get(i));
-                GraphEntry graphEntry = new GraphEntry(date,(int)entities.get(i));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-
+            GraphEntry entry = (GraphEntry) entities.get(i);
+            Date dateEntry = entry.getDate();
+            int poidEntry = entry.getValue();
+            int k=0;
         }
 
         List<Entry> entries = new ArrayList<Entry>();
