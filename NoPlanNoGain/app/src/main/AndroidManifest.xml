@@ -33,6 +33,7 @@
             android:label="android.intent.action.DatabaseLight" />
         <activity android:name=".DisplayPrefDataActivity" />
         <activity android:name=".DisplayIMCActivity" />
+        <activity android:name=".GraphActivity" />
 
         <receiver android:name=".ExerciceWidget">
             <intent-filter>

@@ -38,9 +38,18 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'info.hoang8f:fbutton:1.0.5'
 
+<<<<<<< HEAD
 
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 
+=======
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+>>>>>>> 1257adb98f8008af1605a15ae45f12ade7052c33
 }
 
 apply plugin: 'com.google.gms.google-services'
