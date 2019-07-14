@@ -139,6 +139,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public int getBestWeight(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM pref_table", null);
+        int poidIdeal = 0;
+        if (c.moveToFirst()){
+            do {
+                int taille = c.getInt(3);
+                Log.d("test",Integer.toString(taille));
+                 poidIdeal = (taille - 100);
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return poidIdeal;
+
+
+    }
+
     private Date stringToDate(String aDate) {
 
         if(aDate==null) return null;

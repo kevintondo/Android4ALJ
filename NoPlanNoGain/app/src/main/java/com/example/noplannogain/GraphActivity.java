@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.example.noplannogain.Model.GraphEntry;
@@ -48,6 +49,7 @@ public class GraphActivity extends AppCompatActivity implements OnChartGestureLi
         lineChart.setDrawGridBackground(true);
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
+        ArrayList<Entry> pI = new ArrayList<Entry>();
 //
 //
 //        ArrayList<Entry> x = new ArrayList<Entry>();
@@ -57,6 +59,7 @@ public class GraphActivity extends AppCompatActivity implements OnChartGestureLi
 
         DatabaseHelper dh = new DatabaseHelper(this);
         ArrayList entities =  dh.getGraphDatas();
+        int poidIdeal = dh.getBestWeight();
 
         for(int i=0; i<entities.size();i++){
             GraphEntry graphEntry = (GraphEntry) entities.get(i);
@@ -64,21 +67,29 @@ public class GraphActivity extends AppCompatActivity implements OnChartGestureLi
             int poidEntry = graphEntry.getValue();
 
             Entry entry = new Entry(i , poidEntry);
+            Entry entry2 = new Entry(i , poidIdeal);
+            Log.d("tttttttttttttttttttest", Integer.toString(poidIdeal));
             entries.add(entry);
+            pI.add(entry2);
         }
 
+
         LineDataSet set1;
+        LineDataSet set2;
+
         if (lineChart.getData() != null &&
                 lineChart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
             set1.setValues(entries);
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
+            set2 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
+            set2.setValues(pI);
         } else {
             set1 = new LineDataSet(entries, "Poid");
             set1.setDrawIcons(false);
-            set1.enableDashedLine(10f, 5f, 0f);
-            set1.enableDashedHighlightLine(10f, 5f, 0f);
+//            set1.enableDashedLine(10f, 5f, 0f);
+//            set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.DKGRAY);
             set1.setCircleColor(Color.DKGRAY);
             set1.setLineWidth(1f);
@@ -89,14 +100,30 @@ public class GraphActivity extends AppCompatActivity implements OnChartGestureLi
             set1.setFormLineWidth(1f);
             set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
             set1.setFormSize(15.f);
+
+            set2 = new LineDataSet(pI, "Poid Ideal");
+            set2.setDrawIcons(false);
+//            set2.enableDashedLine(10f, 5f, 0f);
+//            set2.enableDashedHighlightLine(10f, 5f, 0f);
+            set2.setColor(Color.RED);
+            set2.setCircleColor(Color.RED);
+            set2.setLineWidth(1f);
+            set2.setCircleRadius(3f);
+            set2.setDrawCircleHole(false);
+            set2.setValueTextSize(9f);
+            set2.setDrawFilled(true);
+            set2.setFormLineWidth(1f);
+            set2.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+            set2.setFormSize(15.f);
             if (Utils.getSDKInt() >= 18) {
                 Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_blue);
-                set1.setFillDrawable(drawable);
+                set2.setFillDrawable(drawable);
             } else {
-                set1.setFillColor(Color.DKGRAY);
+                set2.setFillColor(Color.RED);
             }
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
+            dataSets.add(set2);
             LineData data = new LineData(dataSets);
             lineChart.setData(data);
         }
