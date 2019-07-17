@@ -127,9 +127,6 @@ public class GraphActivity extends AppCompatActivity implements OnChartGestureLi
             LineData data = new LineData(dataSets);
             lineChart.setData(data);
         }
-
-
-
     }
 
     @Override
