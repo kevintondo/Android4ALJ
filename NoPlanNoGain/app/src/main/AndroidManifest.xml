@@ -11,11 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Calendar"></activity>
+        <receiver android:name=".NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
+        <activity android:name=".Calendar" />
         <activity android:name=".Daily_Training" />
         <activity android:name=".SettingPage" />
 
         <receiver android:name=".AlarmNotificationReceiver" />
+
 
         <activity android:name=".ViewExercice" />
         <activity android:name=".ListExercices" />
