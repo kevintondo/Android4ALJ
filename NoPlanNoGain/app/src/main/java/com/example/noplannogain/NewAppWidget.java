@@ -23,14 +23,10 @@ public class NewAppWidget extends AppWidgetProvider {
                                 int appWidgetId) {
         DatabaseHelper mDatabaseHelper = new DatabaseHelper(context);
         ArrayList<String> arrayImc = mDatabaseHelper.getDatas();
-        String poid = arrayImc.get(3);
 
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        views.setTextViewText(R.id.poidWidgetTxt, poid);
 
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+
+
     }
 
     @Override
@@ -43,6 +39,15 @@ public class NewAppWidget extends AppWidgetProvider {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             remoteViews.setOnClickPendingIntent(R.id.exemple_widget, pendingIntent);
+
+            DatabaseHelper mDatabaseHelper = new DatabaseHelper(context);
+            ArrayList<String> arrayImc = mDatabaseHelper.getDatas();
+            String poid="null";
+            if(arrayImc.size()>0){
+                poid = arrayImc.get(3);
+            }
+            System.out.println(poid+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            remoteViews.setTextViewText(R.id.poidWidgetTxt, poid+" KG");
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
