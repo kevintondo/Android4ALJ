@@ -7,6 +7,11 @@
     <string name="w_btn_plus_label">+</string>
     <string name="view_data">View Data</string>
     <string name="add">Add</string>
+
     <string name="minimum_password">Mot de passe trop court. Entrer au minimum 6 charactères.</string>
     <string name="auth_failed">Erreur Connection. Verifier votre e-mal/mot de passe</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
 </resources>
