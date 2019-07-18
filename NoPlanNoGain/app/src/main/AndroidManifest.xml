@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.noplannogain">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Calendar"></activity>
+        <activity android:name=".SignUp"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Calendar" />
         <activity android:name=".Daily_Training" />
         <activity android:name=".SettingPage" />
 
@@ -21,7 +25,7 @@
         <activity android:name=".ListExercices" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".WidgetConfActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

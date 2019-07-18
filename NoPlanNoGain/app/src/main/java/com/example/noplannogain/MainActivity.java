@@ -1,10 +1,15 @@
 package com.example.noplannogain;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private final String EXO_TYPE_FIELD_NAME = "exercice_type";
 
 
+    private Button signOut;
+    private FirebaseAuth auth;
 
     private SharedPreferences sharedPreferences;
 
@@ -24,9 +31,30 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE);
 
+        signOut = (Button) findViewById(R.id.logoutBtn);
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        //get current user
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+
 
 
     }
+
+
 
     public void writeExercice(View v) {
 
@@ -58,4 +86,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent2);
 
     }
+
+
+
+
 }
